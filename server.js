@@ -7,7 +7,8 @@ async function getIp() {
     });
   });
   let currentIp = await promise;
-  server.listen(8080, () => console.log(`Server started on IP: ${currentIp} : 8080`));
+  let PORT = process.env.PORT || 3000;
+  server.listen(PORT, () => console.log(`Server started on IP: ${currentIp}:${PORT}`));
 }
 
 let counter = 0;
