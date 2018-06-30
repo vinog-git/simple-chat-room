@@ -1,22 +1,31 @@
 const server = require('net').createServer();
-server.listen(8080, () => console.log(`Server started on ${(new Date).toString()}...`));
+getIp();
+async function getIp() {
+  let promise = new Promise((resolve, reject) => {
+    require('dns').lookup(require('os').hostname(), function (err, add, fam) {
+      resolve(add);
+    });
+  });
+  let currentIp = await promise;
+  server.listen(8080, () => console.log(`Server started on IP: ${currentIp} : 8080`));
+}
 
 let counter = 0;
 const connections = {};
 
 server.on('connection', (socket) => {
   console.log(`New connection attempted.`);
-  
-  socket.id = counter++;  
+
+  socket.id = counter++;
   socket.write('\033c Enter your name to join:\n> ');
-  
+
   socket.on('data', message => {
 
     // First time joiners
     if (!connections[socket.id]) {
       socket.name = message.toString().trim();
       socket.write(`${'~'.repeat(message.length + 8)}\nWelcome, ${message}${'~'.repeat(message.length + 8)} \nYour chat is private. But your chat name is logged.\n`);
-      
+
       let previousMembers = [];
       Object.keys(connections).forEach((key) => {
         connections[key].write(`${socket.name} has joined.\n> `);
@@ -27,7 +36,7 @@ server.on('connection', (socket) => {
       } else {
         socket.write(`Nobody has joined yet.\n> `);
       }
-      
+
       connections[socket.id] = socket;
       console.log(`${socket.name} has joined. Total participants(${Object.keys(connections).length})`);
       return;

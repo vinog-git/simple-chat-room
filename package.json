@@ -1,0 +1,32 @@
+{
+  "name": "simple-chat-room",
+  "version": "1.0.0",
+  "description": "A simple chat room created with Node's net module",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vinog-git/simple-chat-room.git"
+  },
+  "keywords": [
+    "Node",
+    "Net",
+    "Module",
+    "chat",
+    "server",
+    "simple",
+    "chat",
+    "sockets",
+    "node",
+    "chat"
+  ],
+  "author": "ViNo G <vinovinothg@gmail.com> (https://github.com/vinog-git)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/vinog-git/simple-chat-room/issues"
+  },
+  "homepage": "https://github.com/vinog-git/simple-chat-room#readme"
+}
