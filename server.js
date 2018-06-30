@@ -56,9 +56,12 @@ server.on('connection', (socket) => {
   // Exiting a chat
   socket.on('end', () => {
     delete connections[socket.id];
-    Object.keys(connections).forEach((key) => {
-      connections[key].write(`${socket.name} left. Total participants(${Object.keys(connections).length})\n> `);
-    })
-    console.log(`${socket.name} left. Total participants(${Object.keys(connections).length})`);
+    if(socket.name){
+      Object.keys(connections).forEach((key) => {
+        connections[key].write(`${socket.name} left. Total participants(${Object.keys(connections).length})\n> `);
+      })
+      console.log(`${socket.name} left. Total participants(${Object.keys(connections).length})`);  
+    }
+    
   });
 });
